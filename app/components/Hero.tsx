@@ -9,8 +9,8 @@ const Hero: FunctionComponent = () => {
       <div className=''>
         {['Products 1', 'Products 2'].map((product) => (
           <div key={product}>
-            {product}
-          </div>
+            {product} s
+          </div> 
         ))}
       </div>
 
