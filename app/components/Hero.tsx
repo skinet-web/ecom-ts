@@ -1,15 +1,29 @@
 import React from 'react'
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect } from 'react'
+import { client } from '../../lib/client.js'
 
-const Hero: FunctionComponent = () => {
+export const getServerSideProps = async () => {
+  const query = '*[_type == "product"]';
+  const products = await client.fetch(query);
+  console.log(products);
+  return {
+    props: { products }
+  }
+}
+
+
+
+const Hero: FunctionComponent= () => {
+
+  console.log(products);
   return (
     <div className='flex flex-col justify-center items-center'>
       <h1 className='text-3xl text-green-700'>Best Seller Products</h1>
       <p>Lorem ipsum Lorem ipsum </p>
       <div className=''>
-        {['Products 1', 'Products 2'].map((product) => (
+        {['Product 1', 'Product 2'].map((product) => (
           <div key={product}>
-            {product} s
+            {product} 
           </div> 
         ))}
       </div>
@@ -17,5 +31,7 @@ const Hero: FunctionComponent = () => {
     </div>
   )
 }
+
+
 
 export default Hero
