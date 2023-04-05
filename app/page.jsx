@@ -1,34 +1,31 @@
+
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import { client } from "../lib/client.js";
 import HeroBanner from "./components/HeroBanner";
-import { FunctionComponent } from "react";
+import { React} from "react";
 
-export const getPost = async () => {
-  const query = '*[_type == "product"]';
-  const products = await client.fetch(query);
 
+async function getData() {
   const bannerQuery = '*[_type == "banner"]';
   const bannerData = await client.fetch(bannerQuery);
 
-  console.log(bannerData);
-  return {
-    props: { products, bannerData },
-  };
-};
+  return bannerData
+}
 
 
 
-const Home = ({ products, bannerData }) => {
+export default async function Home() {
+
+  const bannerData = await getData()
+
   return (
     <main>
-      {console.log(bannerData)}
-      {JSON.stringify(bannerData)}
-      <Navbar />
-      <HeroBanner heroData={bannerData} />
+      <Navbar />      
+      <HeroBanner heroData = {bannerData.length && bannerData[0]}/>
       <Hero />
     </main>
   );
 };
 
-export default Home;
+
