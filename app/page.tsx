@@ -3,7 +3,7 @@ import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import { client } from "../lib/client.js";
 import HeroBanner from "./components/HeroBanner";
-import { React} from "react";
+import { } from "react";
 
 
 async function getData() {
@@ -23,6 +23,7 @@ export default async function Home() {
     <main>
       <Navbar />      
       <HeroBanner heroData = {bannerData.length && bannerData[0]}/>
+      {/* @ts-expect-error Async Server Component */}
       <Hero />
     </main>
   );

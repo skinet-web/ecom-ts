@@ -1,6 +1,6 @@
 
 
-import { React} from 'react'
+import { } from 'react'
 import { client } from '../../lib/client.js'
 
 async function getData() {
@@ -10,25 +10,30 @@ async function getData() {
   return res
 }
 
+interface Product {
+  name: string;
+  
+}
 
 
 
 export default async function Hero() {
 
-  const data = await getData()
+  const data: Product[] = await getData() 
 
+ 
   return (
     <div className='flex flex-col justify-center items-center'>
       <h1 className='text-3xl text-green-700'>Best Seller Products</h1>
       <p>Lorem ipsum Lorem ipsum </p>
       <div className=''>
-        {data?.map((product) => (
-          <div key={product}>
+        {data.map((product) => (
+          <div key={product.name}>
             {product.name} 
           </div> 
         ))}
       </div>
-      {/* {console.log(post)} */}
+      
     </div>
   )
 }
