@@ -31,7 +31,7 @@ export default async function Hero() {
     <div className='flex flex-col justify-center items-center'>
       <h1 className='text-3xl text-green-700'>Best Seller Products</h1>
       <p></p>
-      <div className=''>
+      <div className='flex flex-wrap justify-center items-center'>
         {data.map((product) => (
           <Product key={product._id} product={product} />
         ))}

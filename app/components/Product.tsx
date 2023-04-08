@@ -24,12 +24,12 @@ interface productProps {
 }
 
 
-const Product:FunctionComponent<productProps> = ({product : { image, name, slug, price}}) => {
+const Product:FunctionComponent<productProps> = ({product : { image, name, slug, price }}) => {
   
   return (
-    <div>
+    <div className='mx-10'>
       <Link href={`/product/${slug.current}`}>
-        <div className=' bg-gray-400 rounded-xl my-16 p-4'>
+        <div className=' bg-gray-400 rounded-xl my-5 p-4'>
           <Image src={urlFor(image && image[0]).url()} width='250' height='250' alt='product_image'/>
           <h2>{name}</h2>
           <h3 className='font-bold'>{price} lei</h3>
