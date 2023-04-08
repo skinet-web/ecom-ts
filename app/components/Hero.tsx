@@ -2,6 +2,7 @@
 
 import { } from 'react'
 import { client } from '../../lib/client.js'
+import Product from './Product';
 
 async function getData() {
   const query = '*[_type == "product"]';
@@ -10,27 +11,29 @@ async function getData() {
   return res
 }
 
-interface Product {
+interface Products {
   name: string;
-  
+  product: string;
+  _id: string;
+  slug: Slug;
+  price: number;
+  details: string;
+  image: string;
 }
-
 
 
 export default async function Hero() {
 
-  const data: Product[] = await getData() 
+  const data: Products[] = await getData() 
 
  
   return (
     <div className='flex flex-col justify-center items-center'>
       <h1 className='text-3xl text-green-700'>Best Seller Products</h1>
-      <p>Lorem ipsum Lorem ipsum </p>
+      <p></p>
       <div className=''>
         {data.map((product) => (
-          <div key={product.name}>
-            {product.name} 
-          </div> 
+          <Product key={product._id} product={product} />
         ))}
       </div>
       

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { urlFor } from "@/lib/client";
 
 interface HeroData {
-  image: String;
+  image: string;
   smallText: string;
   midText: string;
   largeText1: string;
@@ -20,7 +20,7 @@ interface HeroBannerProps {
 
 const HeroBanner:FunctionComponent<HeroBannerProps> = ({heroData}) => {
   return (
-    <div className="flex mx-10 bg-gray-400 rounded-xl">
+    <div className="flex mx-10 bg-gray-400 rounded-xl my-16 ">
       <div className="flex flex-col justify-start items-start ml-4 my-2">
         <h3 className="font-semibold text-xl">{heroData.smallText}</h3>
         <h3 className="font-bold text-5xl">{heroData.midText}</h3>
@@ -30,7 +30,7 @@ const HeroBanner:FunctionComponent<HeroBannerProps> = ({heroData}) => {
           ml-2 rounded-full ">
             {heroData.buttonText}
         </button>
-        <div className="w-[95%] mb-3">
+        <div className="w-[95%] mb-2">
           <h3 className="font-bold text-lg">Description</h3>
           <p className="text-justify">{heroData.desc}</p>
         </div>
