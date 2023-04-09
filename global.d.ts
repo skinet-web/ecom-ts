@@ -16,9 +16,20 @@ declare global {
     slug: Slug;
     price: number;
     details: string;
-    image: string;
+    image: Array;
     
   }
+
+  interface Products {
+    name: string;
+    product: string;
+    _id: string;
+    slug: Slug;
+    price: number;
+    details: string;
+    image: Array;
+  }
+  
   
   
   interface productProps {

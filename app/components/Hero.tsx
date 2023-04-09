@@ -11,15 +11,6 @@ async function getData() {
   return res
 }
 
-interface Products {
-  name: string;
-  product: string;
-  _id: string;
-  slug: Slug;
-  price: number;
-  details: string;
-  image: string;
-}
 
 
 export default async function Hero() {
@@ -28,9 +19,9 @@ export default async function Hero() {
 
  
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div className='flex flex-col justify-center items-center my-10'>
       <h1 className='text-3xl text-green-700'>Best Seller Products</h1>
-      <p></p>
+      <p className='mb-10'>Description</p>
       <div className='flex flex-wrap justify-center items-center'>
         {data.map((product) => (
           <Product key={product._id} product={product} />

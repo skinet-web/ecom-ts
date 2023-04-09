@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import { client } from "../lib/client.js";
 import HeroBanner from "./components/HeroBanner";
 import { } from "react";
+import FooterBanner from "./components/FooterBanner";
 
 
 async function getData() {
@@ -18,13 +19,18 @@ async function getData() {
 export default async function Home() {
 
   const bannerData = await getData()
-
+  
   return (
-    <main>
+    <main className="">
       <Navbar />      
       <HeroBanner heroData = {bannerData.length && bannerData[0]}/>
       {/* @ts-expect-error Async Server Component */}
-      <Hero />
+      <Hero />        
+      <FooterBanner footerData = {bannerData[0]}/>
+        
+        
+     
+      
     </main>
   );
 };
