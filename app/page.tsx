@@ -5,7 +5,7 @@ import { client } from "../lib/client.js";
 import HeroBanner from "./components/HeroBanner";
 import { } from "react";
 import FooterBanner from "./components/FooterBanner";
-
+import Footer from "./components/Footer";
 
 async function getData() {
   const bannerQuery = '*[_type == "banner"]';
@@ -27,7 +27,7 @@ export default async function Home() {
       {/* @ts-expect-error Async Server Component */}
       <Hero />        
       <FooterBanner footerData = {bannerData[0]}/>
-        
+      <Footer />  
         
      
       
