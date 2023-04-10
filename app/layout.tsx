@@ -1,3 +1,5 @@
+import Footer from './components/Footer'
+import Navbar from './components/Navbar'
 import './globals.css'
 
 export const metadata = {
@@ -12,7 +14,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className=' flex flex-1 justify-center items-center'>{children}</body>
+      <body className=' flex  flex-col justify-center items-center'>
+        
+        {children}
+        <Footer />
+      </body>
+      
     </html>
   )
 }

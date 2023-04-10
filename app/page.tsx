@@ -27,7 +27,7 @@ export default async function Home() {
       {/* @ts-expect-error Async Server Component */}
       <Hero />        
       <FooterBanner footerData = {bannerData[0]}/>
-      <Footer />  
+       
         
      
       
