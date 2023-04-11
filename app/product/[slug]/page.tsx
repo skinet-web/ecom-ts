@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import  {useState, useEffect } from 'react'
 import { urlFor, client } from '@/lib/client';
 import Image from 'next/image';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar} from 'react-icons/ai';
@@ -9,14 +11,26 @@ async function getData(slug: string) {
     const query = `*[_type == "product" && slug.current == $slug][0]`;
     const params = {slug}
     const res = await client.fetch(query, params);
-  
+    
     return res
 }
 
 
-export default async function page({params} : {params: {slug:string}}) {
 
-const data: Products = await getData(params.slug) 
+ 
+
+export default  function page({params} : {params: {slug:string}}) {
+  
+  
+  const [data, setData] = useState<Products | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getData(params.slug);
+      setData(data);
+    }
+    fetchData();
+  }, [params.slug]);
 
   return (
     <div>
@@ -25,6 +39,12 @@ const data: Products = await getData(params.slug)
         <div className='flex flex-col sm:flex-row justify-center items-center'>
           <div className='left'>
             <Image src={urlFor(data.image[0]).url()} width='200' height='200' alt='product-image'/>
+            <div className='flex '>
+            {data.image.map((item:string, index:number) => (
+            <Image src={urlFor(item).url()} width='250' height='250' alt='product_image' key={`${item} + ${index}`}/>
+            ))}
+        
+            </div>
           </div>
           <div className='right'>
             <h1>{data.name}</h1>
@@ -62,10 +82,7 @@ const data: Products = await getData(params.slug)
          
 
 
-          {/* {data.image.map((item:string, index:number) => (
-            <Image src={urlFor(item).url()} width='250' height='250' alt='product_image' key={`${item} + ${index}`}/>
-          ))} */}
-        
+          
         </>
       )}
     </div>
