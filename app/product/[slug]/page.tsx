@@ -21,6 +21,7 @@ async function getData(slug: string) {
 
 export default  function page({params} : {params: {slug:string}}) {
   
+  const [index, setIndex] = useState(0)
   
   const [data, setData] = useState<Products | null>(null);
 
@@ -36,14 +37,22 @@ export default  function page({params} : {params: {slug:string}}) {
     <div>
       {data && (
         <>
-        <div className='flex flex-col sm:flex-row justify-center items-center'>
-          <div className='left'>
-            <Image src={urlFor(data.image[0]).url()} width='200' height='200' alt='product-image'/>
-            <div className='flex '>
-            {data.image.map((item:string, index:number) => (
-            <Image src={urlFor(item).url()} width='250' height='250' alt='product_image' key={`${item} + ${index}`}/>
-            ))}
-        
+        <div className='flex flex-col lg:flex-row justify-center items-start mt-10 gap-10'>
+          <div className='flex flex-col justify-center items-start'>
+            <div className='bg-secondarycolor rounded-xl '>
+               <Image src={urlFor(data.image && data.image[index]).url()} width='300' height='300' alt='product-image'/>
+            </div>
+            <div className='flex  mt-5 gap-5 '>
+            {data.image?.map((item:string, index:number) => (
+            <Image
+            className='flex  justify-start items-start bg-secondarycolor rounded-xl w-20 object-contain' 
+            src={urlFor(item).url()} 
+            width='250' height='250' 
+            alt='product_image' 
+            key={`${item} + ${index}`}
+            onMouseEnter={() => setIndex(index)}
+            />
+            ))}        
             </div>
           </div>
           <div className='right'>
@@ -60,7 +69,7 @@ export default  function page({params} : {params: {slug:string}}) {
             </div>
             <div>
               <h1>Details:</h1>
-              <p className='text-justify'>{data.details}</p>
+              <p className='text-justify w-[30rem]'>{data.details}</p>
               <h1 className='text-red-700 font-bold text-xl'>{data.price} lei</h1>
             </div>            
             <div className='flex justify-start items-center'>
