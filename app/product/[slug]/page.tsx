@@ -1,10 +1,10 @@
 'use client'
 
-import  {useState, useEffect } from 'react'
+import  {useState, useEffect} from 'react'
 import { urlFor, client } from '@/lib/client';
 import Image from 'next/image';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar} from 'react-icons/ai';
-
+import { useStateContext } from '../../context/StateContext';
 
 
 async function getData(slug: string) {
@@ -19,12 +19,14 @@ async function getData(slug: string) {
 
  
 
-export default  function page({params} : {params: {slug:string}}) {
+export default  function page({params } : {params: {slug:string}}) {
   
   const [index, setIndex] = useState(0)
   
   const [data, setData] = useState<Products | null>(null);
-
+  const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext() ;
+  
+  
   useEffect(() => {
     async function fetchData() {
       const data = await getData(params.slug);
@@ -75,9 +77,9 @@ export default  function page({params} : {params: {slug:string}}) {
             <div className='flex justify-start items-center'>
               <h1>Quantity:</h1>
               <p className='flex justify-start items-center'>
-                <span><AiOutlineMinus /></span>                
-                <span>1</span>
-                <span><AiOutlinePlus /></span>
+                <span onClick={decQty}><AiOutlineMinus /></span>                
+                <span>{qty}</span>
+                <span onClick={incQty}><AiOutlinePlus /></span>
               </p>             
             </div>
             <div className='flex gap-5'>
