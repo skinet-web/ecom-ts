@@ -90,6 +90,7 @@ export default  function page({params } : {params: {slug:string}}) {
               <button className='w-40 py-2  rounded-md bg-red-700  text-white'>Buy now</button>
             </div>
           </div>
+          
         </div>
         
           
