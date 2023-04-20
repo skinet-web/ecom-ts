@@ -83,7 +83,10 @@ export default  function page({params } : {params: {slug:string}}) {
               </p>             
             </div>
             <div className='flex gap-5'>
-              <button className='w-40 py-2  rounded-md border-red-700 border-2 text-red-700'>Add to cart</button>
+              <button 
+              className='w-40 py-2  rounded-md border-red-700 border-2 text-red-700'
+              onClick={() => onAdd(data, qty)}
+              >Add to cart</button>
               <button className='w-40 py-2  rounded-md bg-red-700  text-white'>Buy now</button>
             </div>
           </div>
