@@ -17,13 +17,19 @@ export default function RootLayout({
   return (
     
     <html lang="en">
-     
-      <body className=' flex  flex-col justify-center items-center'>
-      <StateContext>
-          <Toaster />
-          {children}
-          <Footer />
-      </StateContext>
+       
+      <body >
+        <StateContext>
+        <Navbar /> 
+        <div className=' flex  flex-col justify-center items-center'>
+        
+           
+            <Toaster />
+            {children}
+            <Footer />
+       
+        </div>
+        </StateContext>
         
       </body>
       

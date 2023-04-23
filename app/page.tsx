@@ -26,7 +26,7 @@ export default async function Home() {
   
   return (
     <main className="">
-      <Navbar />      
+      {/* <Navbar />       */}
       <HeroBanner heroData = {bannerData.length && bannerData[0]}/>
       {/* @ts-expect-error Async Server Component */}
       <Hero />        

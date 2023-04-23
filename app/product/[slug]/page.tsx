@@ -74,12 +74,15 @@ export default  function page({params } : {params: {slug:string}}) {
               <p className='text-justify w-[30rem]'>{data.details}</p>
               <h1 className='text-red-700 font-bold text-xl'>{data.price} lei</h1>
             </div>            
-            <div className='flex justify-start items-center'>
-              <h1>Quantity:</h1>
+            <div className='flex justify-start items-center gap-4 my-4'>
+              <h1 >Quantity:</h1>
               <p className='flex justify-start items-center'>
-                <span onClick={decQty}><AiOutlineMinus /></span>                
-                <span>{qty}</span>
-                <span onClick={incQty}><AiOutlinePlus /></span>
+                <button className='border-2 w-8 h-5 border-solid text-gray-400
+                        border-gray-400 flex justify-center' onClick={decQty}><AiOutlineMinus /></button>                
+                <span className='border-2 w-8 h-5 border-solid text-gray-400
+                        border-gray-400 flex justify-center items-center'>{qty}</span>
+                <button className='border-2 w-8 h-5 border-solid text-gray-400
+                        border-gray-400 flex justify-center' onClick={incQty}><AiOutlinePlus /></button>
               </p>             
             </div>
             <div className='flex gap-5'>
