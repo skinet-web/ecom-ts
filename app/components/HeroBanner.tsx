@@ -41,13 +41,13 @@ const HeroBanner:FunctionComponent<HeroBannerProps> = ({heroData : {image, small
     // </div>
 
     <div className= 'flex flex-col md:flex-row  bg-secondarycolor text-white mx-10 rounded-xl p-3 mt-20 '>
-      <div className=' flex flex-col md:items-start  md:justify-center md:mx-7 z-0'>
+      <div className=' flex flex-col md:items-start  md:justify-center md:mx-7 z-1'>
           <h3 className='md:text-xl md:font-semibold '>{smallText}</h3>
           <h1 className='text-4xl font-semibold md:text-3xl  '>{midText}</h1>
-          <p className=' font-bold text-6xl md:text-6xl  uppercase md:max-w-xs relative z-4'>{largeText2}</p>
+          <p className=' font-bold text-6xl md:text-6xl  uppercase md:max-w-xs relative z-3'>{largeText2}</p>
       </div>
-      <div className='flex justify-center relative md:ml-[-80px] z-2'>
-        <Image src={urlFor(image).url()}  width='500' height='500' alt='footer-image' className="object-contain"/>
+      <div className='flex justify-center  relative md:ml-[-80px] z-2'>
+        <Image src={urlFor(image).url()}  width='500' height='500' alt='footer-image' className="object-contain "/>
       </div>
 
       <div className=' flex flex-col md:items-start md:justify-center ' >
