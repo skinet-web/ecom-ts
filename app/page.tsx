@@ -15,6 +15,10 @@ async function getData() {
 }
 
 
+export const metadata = {
+  title: 'Ecommerce - TS/Sanity',
+  description: 'Ecommerce - TS',
+}
 
 export default async function Home() {
 
