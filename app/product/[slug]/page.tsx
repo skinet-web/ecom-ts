@@ -77,11 +77,11 @@ export default  function page({params } : {params: {slug:string}}) {
             <div className='flex justify-start items-center gap-4 my-4'>
               <h1 >Quantity:</h1>
               <p className='flex justify-start items-center'>
-                <button className='border-2 w-8 h-5 border-solid text-gray-400
+                <button className='border-2 w-8 h-5 border-solid text-red-500
                         border-gray-400 flex justify-center' onClick={decQty}><AiOutlineMinus /></button>                
-                <span className='border-2 w-8 h-5 border-solid text-gray-400
+                <span className='border-2 w-8 h-5 border-solid 
                         border-gray-400 flex justify-center items-center'>{qty}</span>
-                <button className='border-2 w-8 h-5 border-solid text-gray-400
+                <button className='border-2 w-8 h-5 border-solid text-green-500
                         border-gray-400 flex justify-center' onClick={incQty}><AiOutlinePlus /></button>
               </p>             
             </div>

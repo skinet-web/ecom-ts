@@ -4,13 +4,14 @@
 import { useRef } from 'react'
 import { useStateContext } from '../context/StateContext';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
+import { TiDeleteOutline } from 'react-icons/ti';
 import Link from 'next/link';
 import { urlFor } from '@/lib/client';
 import Image from 'next/image';
 
 const Cart = () => {
   const cartRef = useRef();
-  const {totalPrice, setShowCart, totalQuantities, cartItems} = useStateContext();
+  const {totalPrice, setShowCart, totalQuantities, cartItems, onRemove} = useStateContext();
   return (
     <div className='fixed  bg-white w-full h-[50rem] top-0 right-0 z-10 '>
       <div className='mx-10'>
@@ -42,7 +43,7 @@ const Cart = () => {
           )} 
 
             
-        <div className='mt-10 flex flex-col'>
+        <div className='mt-10 flex flex-col gap-10'>
           {cartItems.length >= 1 && cartItems.map((items:any) => (
             <div key={items._id} className='flex'>
                   <Image src={urlFor(items?.image[0]).url()} width='100' height='100' alt='image'
@@ -62,10 +63,16 @@ const Cart = () => {
                         border-gray-300 flex justify-center items-center'>0</span>
                         <button className='border-2 w-8 h-5 border-solid text-gray-300	
                         border-gray-300 flex justify-center items-center'><AiOutlinePlus /></button>
-                      </p>             
-                   </div> 
+                      </p>                      
+                    </div> 
                   </div>
-                           
+                  <button
+                    type="button"
+                    className="remove-item"
+                    onClick={() => onRemove(items)}
+                  >
+                    <TiDeleteOutline />
+                  </button>         
                             
             </div>
           ))}
