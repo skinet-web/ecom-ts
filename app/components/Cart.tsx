@@ -11,7 +11,7 @@ import Image from 'next/image';
 
 const Cart = () => {
   const cartRef = useRef();
-  const {totalPrice, setShowCart, totalQuantities, cartItems, onRemove} = useStateContext();
+  const {totalPrice, toggleCartItemQuantity, setShowCart, totalQuantities, cartItems, onRemove} = useStateContext();
   return (
     <div className='fixed  bg-white w-full h-[50rem] top-0 right-0 z-10 '>
       <div className='mx-10'>
@@ -57,12 +57,16 @@ const Cart = () => {
                     <div className='flex justify-between items-end h-16'>
                       <p className='flex  items-center '>
                         <button className='border-2 w-8 h-5 border-solid text-gray-300
-                        border-gray-300 flex justify-center'><AiOutlineMinus /></button>                
+                        border-gray-300 flex justify-center'
+                        onClick={() => toggleCartItemQuantity(items._id, 'dec')}
+                        ><AiOutlineMinus /></button>                
                         <span 
                         className='border-2 w-8 h-5 border-solid	
-                        border-gray-300 flex justify-center items-center'>0</span>
+                        border-gray-300 flex justify-center items-center'>{items.quantity}</span>
                         <button className='border-2 w-8 h-5 border-solid text-gray-300	
-                        border-gray-300 flex justify-center items-center'><AiOutlinePlus /></button>
+                        border-gray-300 flex justify-center items-center'
+                        onClick={() => toggleCartItemQuantity(items._id, 'inc')}
+                        ><AiOutlinePlus /></button>
                       </p>
                       <button
                         type="button"
