@@ -47,8 +47,10 @@ const toggleCartItemQuantity = (id, value) => {
 
     if (value === 'inc') {        
       const newCartItems = [...cartItems];
-      newCartItems[index] = { ...foundProduct, quantity: foundProduct.quantity + 1 };
+      console.log(newCartItems)
+      newCartItems[index] = { ...foundProduct, quantity: foundProduct.quantity + 1 };      
       setCartItems(newCartItems);
+     
       setTotalPrice((prevTotalPrice) => prevTotalPrice +  foundProduct.price);
       setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + 1);
 
