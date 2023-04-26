@@ -45,7 +45,7 @@ const Cart = () => {
             
         <div className='mt-10 flex flex-col gap-10'>
           {cartItems.length >= 1 && cartItems.map((items:any) => (
-            <div key={items._id} className='flex'>
+            <div key={items._id} className='flex '>
                   <Image src={urlFor(items?.image[0]).url()} width='100' height='100' alt='image'
                   className='bg-secondarycolor rounded-xl'/>   
                   <div className='flex flex-col ml-3 w-full'>
@@ -54,8 +54,8 @@ const Cart = () => {
                       <span className=''>{items.price} lei</span> 
                     </div>
                       
-                    <div className='flex justify-start items-end h-16'>
-                      <p className='flex  items-center'>
+                    <div className='flex justify-between items-end h-16'>
+                      <p className='flex  items-center '>
                         <button className='border-2 w-8 h-5 border-solid text-gray-300
                         border-gray-300 flex justify-center'><AiOutlineMinus /></button>                
                         <span 
@@ -63,26 +63,35 @@ const Cart = () => {
                         border-gray-300 flex justify-center items-center'>0</span>
                         <button className='border-2 w-8 h-5 border-solid text-gray-300	
                         border-gray-300 flex justify-center items-center'><AiOutlinePlus /></button>
-                      </p>                      
+                      </p>
+                      <button
+                        type="button"
+                        className=""
+                        onClick={() => onRemove(items)}
+                      >
+                        <TiDeleteOutline />
+                      </button>                       
                     </div> 
-                  </div>
-                  <button
-                    type="button"
-                    className="remove-item"
-                    onClick={() => onRemove(items)}
-                  >
-                    <TiDeleteOutline />
-                  </button>         
-                            
+                  </div>                            
             </div>
           ))}
-         </div>
-       
-      </div>
-      
-    
-
-      
+          {cartItems.length >= 1 && (
+            <div className='flex flex-col '>
+              <div className='flex justify-between'>
+                <h3>Subtotal:</h3>
+                <h3>{totalPrice} lei</h3>
+              </div>
+              <div className='flex justify-center mt-8'>
+                <button
+                type='button'
+                className='bg-red-500 rounded-md w-[20rem] h-8 text-white uppercase'>
+                Paying with stripe  
+                </button>
+              </div>
+            </div>        
+          )}
+         </div>       
+      </div>     
     </div>
   )
 }
