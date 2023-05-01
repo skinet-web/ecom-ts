@@ -1,17 +1,42 @@
-'use client'
 
 
-import { useRef } from 'react'
+
+
 import { useStateContext } from '../context/StateContext';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
 import Link from 'next/link';
 import { urlFor } from '@/lib/client';
 import Image from 'next/image';
+import getStripe from '../../lib/getStripe'
+import  toast  from 'react-hot-toast';
+import axios from 'axios';
 
 const Cart = () => {
-  const cartRef = useRef();
+  
   const {totalPrice, toggleCartItemQuantity, setShowCart, totalQuantities, cartItems, onRemove} = useStateContext();
+
+  const handleCheckout = async () => {
+    const stripe = await getStripe();
+
+    const response = await fetch('/api/payment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(cartItems),
+    });
+
+    
+    
+    const data = await response.json();
+
+    toast.loading('Redirecting...');
+
+    stripe.redirectToCheckout({ sessionId: data.id });
+  }
+
+  
   return (
     <div className='fixed  bg-white w-full h-[50rem] top-0 right-0 z-10 '>
       <div className='mx-10'>
@@ -88,7 +113,8 @@ const Cart = () => {
               <div className='flex justify-center mt-8'>
                 <button
                 type='button'
-                className='bg-red-500 rounded-md w-[20rem] h-8 text-white uppercase'>
+                className='bg-red-500 rounded-md w-[20rem] h-8 text-white uppercase'
+                onClick={handleCheckout}>
                 Paying with stripe  
                 </button>
               </div>
