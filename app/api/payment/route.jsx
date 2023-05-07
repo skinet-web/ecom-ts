@@ -3,6 +3,7 @@ import Stripe from 'stripe';
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export  async function handler(req, res) {
+  const data = await response.json();
   if (req.method === 'POST') {
     try {
       const params = {
