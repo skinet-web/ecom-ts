@@ -1,7 +1,7 @@
 
 
 
-
+import React, { useState } from 'react';
 import { useStateContext } from '../context/StateContext';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
@@ -13,31 +13,29 @@ import  toast  from 'react-hot-toast';
 import axios from 'axios';
 
 const Cart = () => {
-  
+
+
+ 
+
   const {totalPrice, toggleCartItemQuantity, setShowCart, totalQuantities, cartItems, onRemove} = useStateContext();
 
-  const handleCheckout = async () => {
-    const stripe = await getStripe();
-
-    const response = await fetch('/api/payment', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      
-      body: JSON.stringify(cartItems),
-      
-    });
-
-   
+  const checkoutHandler = async () => {
     
-    const data = await response.json();
+    // move to stripe checkoutpage
+    try {
+      const { data } = await axios.post(
+        `${process.env.API_URL}/api/orders/checkout_session`,
+        {
+          items: cartItems?.cartItems,
+       
+        }
+      );
 
-    toast.loading('Redirecting...');
-
-    stripe.redirectToCheckout({ sessionId: data.id });
-  }
-
+      window.location.href = data.url;
+    } catch (error:any) {
+      console.log(error.response);
+    }
+  };
   
   return (
     <div className='fixed  bg-white w-full h-[50rem] top-0 right-0 z-10 '>
@@ -116,7 +114,7 @@ const Cart = () => {
                 <button
                 type='button'
                 className='bg-red-500 rounded-md w-[20rem] h-8 text-white uppercase'
-                onClick={handleCheckout}>
+                onClick={checkoutHandler}>
                 Paying with stripe  
                 </button>
               </div>
