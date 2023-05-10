@@ -1,46 +1,54 @@
 import Stripe from "stripe";
-import { NextRequest } from "next/server";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-export const checkoutSession = async (req, res) => {
-  const body = req.body;
+export default async function handler(req, res) {
+  if (req.method === "POST") {
+    try {
+      const params = {
+        submit_type: "pay",
+        mode: "payment",
+        payment_method_types: ["card"],
+        billing_address_collection: "auto",
 
-  const line_items = body?.items?.map((item) => {
-    return {
-      price_data: {
-        currency: "usd",
-        product_data: {
-          name: item.name,
-          images: [item.image],
-          metadata: { productId: item.product },
-        },
-        unit_amount: item.price * 100,
-      },
-      tax_rates: ["txr_1MUVJSAlHMiRMt8E2khIxJEi"],
-      quantity: item.quantity,
-    };
-  });
+        line_items: req.body.map((item) => {
+          const img = item.image[0].asset._ref;
+          const newImage = img
+            .replace(
+              "image-",
+              "https://cdn.sanity.io/images/vfxfwnaw/production/"
+            )
+            .replace("-webp", ".webp");
 
-  const shippingInfo = body?.shippingInfo;
+          return {
+            price_data: {
+              currency: "usd",
+              product_data: {
+                name: item.name,
+                images: [newImage],
+              },
+              unit_amount: item.price * 100,
+            },
+            adjustable_quantity: {
+              enabled: true,
+              minimum: 1,
+            },
+            quantity: item.quantity,
+          };
+        }),
+        success_url: `${req.headers.origin}/success`,
+        cancel_url: `${req.headers.origin}/canceled`,
+      };
 
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
-    success_url: `${process.env.API_URL}/me/orders?order_success=true`,
-    cancel_url: `${process.env.API_URL}`,
-    customer_email: req?.user?.email,
-    client_reference_id: req?.user?._id,
-    mode: "payment",
-    metadata: { shippingInfo },
-    shipping_options: [
-      {
-        shipping_rate: "shr_1MUVKxAlHMiRMt8EmUp4SKxz",
-      },
-    ],
-    line_items,
-  });
+      // Create Checkout Sessions from body params.
+      const session = await stripe.checkout.sessions.create(params);
 
-  res.status(200).json({
-    url: session.url,
-  });
-};
+      res.status(200).json(session);
+    } catch (err) {
+      res.status(err.statusCode || 500).json(err.message);
+    }
+  } else {
+    res.setHeader("Allow", "POST");
+    res.status(405).end("Method Not Allowed");
+  }
+}
