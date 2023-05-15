@@ -19,24 +19,20 @@ const Cart = () => {
 
   const {totalPrice, toggleCartItemQuantity, setShowCart, totalQuantities, cartItems, onRemove} = useStateContext();
 
-  const handleCheckout = async () => {
-    const stripe = await getStripe();
-
-    const response = await fetch('../api/payment', {
-      method: 'POST',
+  const handleSubscription = async (e:any) => {
+    e.preventDefault();
+    const { data } = await axios.post('/api/payment',
+    {
+      priceId: totalPrice.id
+    },
+    {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(cartItems),
-    });   
-    
-    const data = await response.json();
-
-    toast.loading('Redirecting...');
-
-    stripe.redirectToCheckout({ sessionId: data.id });
+    }
+    );
+    window.location.assign(data)
   }
-
     
  
   
@@ -117,7 +113,7 @@ const Cart = () => {
                 <button
                 type='button'
                 className='bg-red-500 rounded-md w-[20rem] h-8 text-white uppercase'
-                onClick={handleCheckout}>
+                onClick={handleSubscription}>
                 Paying with stripe  
                 </button>
               </div>
