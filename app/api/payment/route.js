@@ -7,7 +7,6 @@ export async function POST(request) {
   let data = await request.json();
   console.log(data.body);
   let body = data.body;
-  console.log("priceId", body);
   const session = await stripe.checkout.sessions.create({
     line_items: body.map((item) => {
       const img = item.image[0].asset._ref;
