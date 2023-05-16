@@ -5,7 +5,7 @@ export async function POST(request) {
   console.log(request);
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
   let data = await request.json();
-  console.log(data.body);
+
   let body = data.body;
   const session = await stripe.checkout.sessions.create({
     line_items: body.map((item) => {
