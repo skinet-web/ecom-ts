@@ -9,21 +9,20 @@ import Link from 'next/link';
 import { urlFor } from '@/lib/client';
 import Image from 'next/image';
 import getStripe from '../../lib/getStripe'
+import { loadStripe } from '@stripe/stripe-js';
 import  toast  from 'react-hot-toast';
 import axios from 'axios';
 
+
 const Cart = () => {
-
-
- 
-
   const {totalPrice, toggleCartItemQuantity, setShowCart, totalQuantities, cartItems, onRemove} = useStateContext();
 
-  const handleSubscription = async (e:any) => {
+  const handleSubscription = async (e:any) => {   
     e.preventDefault();
-    const { data } = await axios.post('/api/payment',
+    console.log(totalPrice)
+    const { data } = await axios.post("/api/payment",
     {
-      priceId: totalPrice.id
+      body: cartItems
     },
     {
       headers: {
@@ -31,9 +30,12 @@ const Cart = () => {
       },
     }
     );
+   
     window.location.assign(data)
   }
     
+
+
  
   
   return (
