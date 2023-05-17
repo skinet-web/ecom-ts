@@ -13,6 +13,7 @@ interface HeroData {
   buttonText: string;
   desc: string;
   product: string;
+  slug:string;
 }
 
 interface HeroBannerProps {
