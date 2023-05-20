@@ -5,7 +5,7 @@ import { urlFor, client } from '@/lib/client';
 import Image from 'next/image';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar} from 'react-icons/ai';
 import { useStateContext } from '../../context/StateContext';
-
+import axios from 'axios';
 
 async function getData(slug: string) {
     const query = `*[_type == "product" && slug.current == $slug][0]`;
@@ -16,7 +16,6 @@ async function getData(slug: string) {
 }
 
 
-
  
 
 export default  function page({params } : {params: {slug:string}}) {
@@ -24,8 +23,8 @@ export default  function page({params } : {params: {slug:string}}) {
   const [index, setIndex] = useState(0)
   
   const [data, setData] = useState<Products | null>(null);
-  const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext() ;
-  
+  const {totalPrice, cartItems, decQty, incQty, qty, onAdd, handleSubscription, setShowCart } = useStateContext() ;
+
   
   useEffect(() => {
     async function fetchData() {
@@ -34,6 +33,17 @@ export default  function page({params } : {params: {slug:string}}) {
     }
     fetchData();
   }, [params.slug]);
+
+  
+  const buyNow = async () => {
+    
+    await onAdd(data, qty);  
+    await handleSubscription()
+    
+    console.log('test');
+    
+  };
+
 
   return (
     <div>
@@ -90,7 +100,11 @@ export default  function page({params } : {params: {slug:string}}) {
               className='w-40 py-2  rounded-md border-red-700 border-2 text-red-700'
               onClick={() => onAdd(data, qty)}
               >Add to cart</button>
-              <button className='w-40 py-2  rounded-md bg-red-700  text-white'>Buy now</button>
+              {/* <button className='w-40 py-2  rounded-md bg-red-700  text-white'
+              onClick={() => {
+                
+                buyNow();
+              }}>Buy now</button> */}
             </div>
           </div>
           

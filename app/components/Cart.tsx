@@ -22,7 +22,7 @@ const Cart = () => {
     console.log(totalPrice)
     const { data } = await axios.post("/api/payment",
     {
-      body: cartItems
+      body: cartItems 
     },
     {
       headers: {
@@ -39,7 +39,7 @@ const Cart = () => {
  
   
   return (
-    <div className='fixed  bg-white w-full h-[50rem] top-0 right-0 z-10 '>
+    <div className='fixed  bg-white w-full h-[50rem] top-0 right-0 z-10'>
       <div className='mx-10'>
         <div className='flex justify-between  mt-10'>
           <div className='flex gap-3'>

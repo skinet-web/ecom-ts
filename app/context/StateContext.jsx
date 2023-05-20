@@ -2,6 +2,8 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import {toast} from 'react-hot-toast';
+import axios from "axios";
+import product from "@/ecommerce-sanity/schemas/product";
 
 const Context = createContext();
 
@@ -87,6 +89,23 @@ const toggleCartItemQuantity = (id, value) => {
     });
   };
 
+  const handleSubscription = async () => {   
+    
+    console.log(totalPrice)
+    const { data } = await axios.post("/api/payment",
+    {
+      body: cartItems 
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+    );
+   
+    window.location.assign(data)
+  }
+
   return (
     <Context.Provider
       value={{
@@ -100,7 +119,8 @@ const toggleCartItemQuantity = (id, value) => {
         decQty, 
         onAdd,
         onRemove, 
-        toggleCartItemQuantity,     
+        toggleCartItemQuantity,
+        handleSubscription,     
       }}
     >
       {children}
