@@ -31,7 +31,7 @@ export async function POST(request) {
       };
     }),
     mode: "payment",
-    success_url: `${request.headers.host}/success`,
+    success_url: "https://ecom-ts.netlify.app/success",
     cancel_url: "http://localhost:3000",
   });
   return NextResponse.json(session.url);
