@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar} from 'react-icons/ai';
 import { useStateContext } from '../../context/StateContext';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 async function getData(slug: string) {
     const query = `*[_type == "product" && slug.current == $slug][0]`;
@@ -35,12 +36,15 @@ export default  function page({params } : {params: {slug:string}}) {
   }, [params.slug]);
 
   
-  const buyNow = async () => {
+  const cartCheck = () => {
     
-    await onAdd(data, qty);  
-    await handleSubscription()
+    if(cartItems.length === 0){
+      toast.error('You need to add a product to the cart')
+    } else {
+      handleSubscription()
+    }
     
-    console.log('test');
+    console.log(cartItems);
     
   };
 
@@ -100,11 +104,11 @@ export default  function page({params } : {params: {slug:string}}) {
               className='w-40 py-2  rounded-md border-red-700 border-2 text-red-700'
               onClick={() => onAdd(data, qty)}
               >Add to cart</button>
-              {/* <button className='w-40 py-2  rounded-md bg-red-700  text-white'
+              <button className='w-40 py-2  rounded-md bg-red-700  text-white'
               onClick={() => {
                 
-                buyNow();
-              }}>Buy now</button> */}
+                cartCheck();
+              }}>Buy now</button>
             </div>
           </div>
           
