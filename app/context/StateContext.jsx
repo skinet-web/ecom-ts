@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import {toast} from 'react-hot-toast';
 import axios from "axios";
-import product from "@/ecommerce-sanity/schemas/product";
+
 
 const Context = createContext();
 
