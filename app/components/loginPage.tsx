@@ -2,9 +2,10 @@
 
 import React from 'react'
 import GoogleButton from 'react-google-button'
-import {signIn} from 'next-auth/react'
+import {signIn, useSession} from 'next-auth/react'
 
 const loginPage = () => {
+  
   return (
     <div>
         Login Page.

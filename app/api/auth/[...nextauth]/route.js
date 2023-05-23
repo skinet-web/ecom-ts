@@ -6,17 +6,9 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      session: true,
     }),
   ],
   secret: process.env.SECRET,
-  cookies: true,
-  callbacks: {
-    session: async (session, user) => {
-      session.user = user;
-      return session;
-    },
-  },
 };
 
 const handler = NextAuth(authOptions);
