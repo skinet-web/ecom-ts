@@ -1,17 +1,16 @@
-'use client'
+"use client";
 
-import React from 'react'
-import GoogleButton from 'react-google-button'
-import {signIn, useSession} from 'next-auth/react'
+import React from "react";
+import GithubButton from 'react-github-login-button'
+import { signIn, useSession } from "next-auth/react";
 
 const loginPage = () => {
-  
   return (
     <div>
-        Login Page.
-        <GoogleButton onClick={ () => signIn('google')}/>
+      Login Page.
+      <GithubButton onClick={() => signIn("github")} />
     </div>
-  )
-}
+  );
+};
 
-export default loginPage
+export default loginPage;
