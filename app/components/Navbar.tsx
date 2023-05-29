@@ -6,6 +6,8 @@ import { useStateContext } from '../context/StateContext';
 import Cart from './Cart';
 import Link from 'next/link'
 
+import UserMenu from './Navbar/UserMenu';
+
 const Navbar = () => {
   const {showCart, setShowCart, totalQuantities} = useStateContext();
   return (
@@ -13,22 +15,22 @@ const Navbar = () => {
         <div className=''>
             Ecommerce Logo
         </div>
-        <div className=' justify-center items-center'>
-          <Link href='/login'>
+        <div className='flex justify-center items-center'>
+          {/* <Link href='/login'>
             <button             
             className='p-1 bg-gray-500 rounded-xl text-white'>
               Login
             </button>
-          </Link>
-          
+          </Link> */}
+          <div>
+              <UserMenu />
+          </div>                      
           <button className='' onClick={() => setShowCart(true)}>
-              <AiOutlineShopping className='text-2xl'/>
-              <span className='absolute top-4 bg-red-700 rounded-full w-5
-               text-white text-sm'>{totalQuantities}</span>
-          </button>
+                <AiOutlineShopping className='text-2xl'/>
+                <span className='absolute top-4 bg-red-700 rounded-full w-5
+                text-white text-sm'>{totalQuantities}</span>
+          </button> 
         </div>
-        
-        
         { showCart && <Cart />}
     </div>
   )
